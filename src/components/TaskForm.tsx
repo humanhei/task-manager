@@ -1,4 +1,5 @@
 import { Formik, FormikErrors } from 'formik';
+import * as Yup from 'yup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import categories from '../categories';
@@ -20,6 +21,11 @@ function TaskForm({ onAddItem }: taskFormProps) {
       <div>
         <Formik
           initialValues={{ title: '', date: '', cat: '' }}
+          validationSchema={Yup.object({
+            title: Yup.string(),
+            date: Yup.string(),
+            cat: Yup.string(),
+          })}
           validate={values => {
             const errors: FormikErrors<formValue> = {};
             if (!values.title || values.title.length < 3) {
